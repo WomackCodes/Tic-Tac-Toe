@@ -7,6 +7,7 @@
     --mark-size: calc(var(--cell-size) * .9);
 }
 
+
 body {
     margin: 0;
 }
