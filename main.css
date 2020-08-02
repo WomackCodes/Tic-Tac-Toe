@@ -1,0 +1,172 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+:root{
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+body {
+    margin: 0;
+}
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto)
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid rgb(182, 109, 20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+/* take out the borders on the edges of every cell */
+/* TODO .cell:first and nth child, how do they tag? */
+.cell:first-child {
+    border-top: none;
+    border-left: none;
+}
+.cell:nth-child(2) {
+    border-top: none;
+}
+.cell:nth-child(3) {
+    border-top: none;
+    border-right: none;
+}
+.cell:nth-child(4) {
+    border-left: none;
+}
+.cell:nth-child(6) {
+    border-right: none;
+}
+.cell:nth-child(7) {
+    border-bottom: none;
+    border-left: none;
+}
+.cell:nth-child(8) {
+    border-bottom: none;
+}
+.cell:nth-child(9) {
+    border-bottom: none;
+    border-right: none;
+}
+
+.cell.x { 
+    cursor: not-allowed;
+}
+.cell.o {
+    cursor: not-allowed;
+} 
+
+/* Design for the x */
+/* Two elements simply rotated 45 degrees */
+.cell.x::before {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15); 
+    height: var(--mark-size);
+    background-color: black;
+} 
+.cell.x::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15); 
+    height: var(--mark-size);
+    background-color: black;
+}
+
+/* to make x when hovering cursor during x turn */
+/* space after <.board.x > means go to child */
+.board.x .cell:not(.x):not(.o):hover::before {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15); 
+    height: var(--mark-size);
+    background-color: grey;
+    transform: rotate(45deg);
+}
+.board.x .cell:not(.x):not(.o):hover::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15); 
+    height: var(--mark-size);
+    background-color: grey;
+    transform: rotate(-45deg);
+}
+
+/* to make o when hovering cursor during o turn */
+/* space after <.board.o > means go to child */
+
+.cell.o::before {
+    background-color: red;
+}
+.board.o .cell:not(.x):not(.o):hover::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    
+}
+.board.o .cell:not(.x):not(.o):hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: var(--mark-size);
+    height: var(--mark-size);
+
+}
+    
+.cell.x::before,
+.board.x .cell:hover::before {
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:hover::after {
+    transform: rotate(-45deg);
+}
+
+
+/* Design for the cirlce:  */
+.cell.o::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: black;
+}
+.cell.o::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: calc(var(--mark-size) * .70);
+    height: calc(var(--mark-size) * .70);
+    background-color: white;
+}
+
+/* 1 cirlce black (::before), 1 cirlce white (::after)  */
+/*.cell.o::before {
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: black;
+}
+*/
+/* .cell.o::after {
+    width: calc(var(--mark-size) * .70);
+    height: calc(var(--mark-size) * .70);
+    background-color: white;
+}
+*/
