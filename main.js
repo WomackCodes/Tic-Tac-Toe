@@ -9,14 +9,21 @@ const cellEl = document.querySelectorAll('[xOcell]');
 let xTurn = "";
 let oTurn = ""; 
 
+startGame(); /* initiator */
+
+/* START GAME FUNCTION - touch that keyboard lightly */
+function startGame () {
+    cellEl.forEach(cell => {
+        cell.addEventListener('click', handleClick, { once: true });
+    })
+    hoverClass ()
+}
+/* End START GAME FUNCTION - ok now go Godzilla mode */
+
 /* CTO - The event listener will only work ONE TIME with 
 the {once: true} argument. This allows you to make it so
 that the user can click on the cell and it will only fire 
 one time! */ 
-
-cellEl.forEach(cell => {
-    cell.addEventListener('click', handleClick, {once: true});
-})
 
 function handleClick (evt) { 
     const cell = evt.target;
