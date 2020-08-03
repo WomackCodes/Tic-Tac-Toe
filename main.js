@@ -17,6 +17,9 @@ const WINNING_COMBINATIONS = [
     [0, 4, 8],
     [2, 4, 6],
 ]
+/* const board = document.getElementById('board'); */
+const winElement = document.getElementById('winningMessage');
+const winTextElement = document.querySelector('winText');
 let xTurn = "";
 let oTurn = ""; 
 
@@ -50,12 +53,21 @@ turn then return that data, otherwise it's O turn. */
 /* ---------------WINNING LOGIC FUNCTIONS--------------- */ 
 
     if (chickenDinner(currentClass)) {
-        console.log ('winner')
+        endGame(false);
     }
 
     swapTurns ();
     hoverClass ();
 }
+function endGame(tie) {
+    if (tie) {
+
+    } else {
+        winElement.innerText = `${xTurn ? "X's" : "O's"} Win!`;
+    }
+    winElement.classList.add('show');
+}
+
 function newClick(cell, currentClass) {
     cell.classList.add(currentClass)
 }
