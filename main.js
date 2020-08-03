@@ -6,7 +6,16 @@ const X_CLASS = 'x';
 const O_CLASS = 'o';
 const cellEl = document.querySelectorAll('[xOcell]');
 const WINNING_COMBINATIONS = [
-    []
+/* Listed out in array 0 base */ 
+/* wins = left to right, top to bottom, diagonals */    
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
 ]
 let xTurn = "";
 let oTurn = ""; 
@@ -37,6 +46,13 @@ click. Now we will want to pass this data to determine
 how to mark the cell with X or O (based on currentClass
 which we'll get from ternary operator saying if it's X
 turn then return that data, otherwise it's O turn. */
+   
+/* ---------------WINNING LOGIC FUNCTIONS--------------- */ 
+
+if(chickenDinner() {
+        console.log ('winner')
+    }
+
     swapTurns ();
     hoverClass ();
 }
@@ -65,10 +81,14 @@ function hoverClass() {
         board.classList.add(X_CLASS);
     }
 }
-/* first this will ensure all classes are cleared from the 
+/* method this will ensure all classes are cleared from the 
 HTML board on hover and only show O if oTurn is true... 
 otherwise X for xTurn */
 
+/*this will check to see if any (some) win combo met */
+function chickenDinner (currentClass) {
+    WINNING_COMBINATIONS.some()
+}
 
 
 
