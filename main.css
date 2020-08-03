@@ -12,11 +12,9 @@ and same for *::after to allow us to have.... TODO
     --mark-size: calc(var(--cell-size) * .9);
 }
 
-
 body {
     margin: 0;
 }
-
 
 .board {
     width: 100vw;
@@ -154,7 +152,6 @@ Below takes out the borders on the edges of every cell */
     width: var(--mark-size);
     height: var(--mark-size);
     background-color: grey;
-    
 }
 .board.o .cell:not(.x):not(.o):hover::after {
     content: '';
@@ -163,7 +160,6 @@ Below takes out the borders on the edges of every cell */
     width: calc(var(--mark-size) * .70);
     height: calc(var(--mark-size) * .70);
     background-color: white;
-
 }
 
 /* page and message when you win */
@@ -180,7 +176,6 @@ Below takes out the borders on the edges of every cell */
     color: white;
     font-size: 80px;
     flex-direction: column;
-
 }
 
 .winning-message button {
