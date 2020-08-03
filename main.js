@@ -5,6 +5,7 @@ cellEl is how we'll grab all 9 cells in HTML */
 const X_CLASS = 'x';
 const O_CLASS = 'o';
 const cellEl = document.querySelectorAll('[xOcell]');
+const board = document.getElementById('board');
 const WINNING_COMBINATIONS = [
 /* Listed out in array 0 base */ 
 /* wins = left to right, top to bottom, diagonals */    
@@ -17,12 +18,11 @@ const WINNING_COMBINATIONS = [
     [0, 4, 8],
     [2, 4, 6],
 ]
-/* const board = document.getElementById('board'); */
-const winElement = document.getElementById('winningMessage');
-const winTextElement = document.querySelector('winText');
-let xTurn = "";
-let oTurn = ""; 
 
+const winningMessageElement = document.getElementById('winningMessage');
+const winningMessageTextElement = document.querySelector('[winning-text]');
+let oTurn = false; 
+let xTurn = true;
 startGame(); /* initiator */
 
 /* START GAME FUNCTION - touch that keyboard lightly */
@@ -41,7 +41,7 @@ one time! */
 
 function handleClick (evt) { 
     const cell = evt.target;
-    const currentClass = xTurn ? X_CLASS : O_CLASS;
+    const currentClass = oTurn ? O_CLASS : X_CLASS;
     newClick (cell, currentClass);
 /*  Now we've got a class turn, assigned it
 to currentClass, and have targeted the cell of eListen
@@ -54,22 +54,34 @@ turn then return that data, otherwise it's O turn. */
 
     if (chickenDinner(currentClass)) {
         endGame(false);
+    } else if (isTie()) {
+        endGame(true);
+    } else {
+        swapTurns();
+        hoverClass();
     }
-
-    swapTurns ();
-    hoverClass ();
 }
 function endGame(tie) {
     if (tie) {
-
+    winningMessageTextElement.innerText = "It's a TIE. Cat Game.";
     } else {
-        winElement.innerText = `${xTurn ? "X's" : "O's"} Win!`;
+    winningMessageTextElement.innerText = `${oTurn ? "O's" : "X's"} Win!`;
     }
-    winElement.classList.add('show');
+    winningMessageElement.classList.add('show');
 }
 
+function isTie() {
+    return [...cellEl].every(cell => {
+        return cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS);
+    })
+}
+/* ABOVE returns a Boolean Value of T/F if every cell 
+contains an X or a O. If so this means we have a tie... 
+and the [...cellEl] means we destructure the cell 
+elements into an array so we can use methods */ 
+
 function newClick(cell, currentClass) {
-    cell.classList.add(currentClass)
+    cell.classList.add(currentClass);
 }
 /*Link to the classList.add () that accesses DOM
 to pass the informatino of the click (cell and class of
@@ -78,7 +90,7 @@ displays to user that data on the HTML Browser dynamically
 https://developer.mozilla.org/en-US/docs/Web/API/Element/classList   */
 
 function swapTurns () {
-    xTurn = !xTurn;
+    oTurn = !oTurn;
 }
 /* this easy function just inverts the ternary operator
 output from line 23. This step swaps turns and will
