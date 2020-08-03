@@ -1,6 +1,11 @@
+/* The < *, > is eveyrthing selector
+the *::before selects all things with same pseudo element
+and same for *::after to allow us to have.... TODO 
+*/ 
 *, *::after, *::before {
     box-sizing: border-box;
 }
+/* Allows for global declarations, cascade can overwrite */
 
 :root{
     --cell-size: 100px;
@@ -33,8 +38,12 @@ body {
     position: relative;
     cursor: pointer;
 }
-/* take out the borders on the edges of every cell */
-/* TODO .cell:first and nth child, how do they tag? */
+
+/* -------------------------------------------------------
+Up to this point I'm the same as tutorial but can explain
+
+Below takes out the borders on the edges of every cell */
+/* Cannot explain the use of "3n +1" my code below */
 .cell:first-child {
     border-top: none;
     border-left: none;
@@ -64,12 +73,12 @@ body {
     border-right: none;
 }
 
+/* Verifying from this point on that the CSS matches */
+
+.cell.o,
 .cell.x { 
     cursor: not-allowed;
 }
-.cell.o {
-    cursor: not-allowed;
-} 
 
 /* Design for the x */
 /* Two elements simply rotated 45 degrees */
@@ -86,6 +95,34 @@ body {
     width: calc(var(--mark-size) * .15); 
     height: var(--mark-size);
     background-color: black;
+}
+
+.cell.x::before,
+.board.x .cell:hover::before {
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:hover::after {
+    transform: rotate(-45deg);
+}
+
+
+/* Design for the cirlce:  [153-168] */
+.cell.o::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: black;
+}
+.cell.o::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: calc(var(--mark-size) * .70);
+    height: calc(var(--mark-size) * .70);
+    background-color: white;
 }
 
 /* to make x when hovering cursor during x turn */
@@ -107,67 +144,31 @@ body {
     transform: rotate(-45deg);
 }
 
-/* to make o when hovering cursor during o turn */
+/* to make o when hovering cursor during o's turn */
 /* space after <.board.o > means go to child */
-
-.cell.o::before {
-    background-color: red;
-}
 .board.o .cell:not(.x):not(.o):hover::before {
     content: '';
     position: absolute;
     border-radius: 50%;
     width: var(--mark-size);
     height: var(--mark-size);
+    background-color: grey;
     
 }
 .board.o .cell:not(.x):not(.o):hover::after {
     content: '';
     position: absolute;
     border-radius: 50%;
-    width: var(--mark-size);
-    height: var(--mark-size);
-
-}
-    
-.cell.x::before,
-.board.x .cell:hover::before {
-    transform: rotate(45deg);
-}
-.cell.x::after,
-.board.x .cell:hover::after {
-    transform: rotate(-45deg);
-}
-
-
-/* Design for the cirlce:  */
-.cell.o::before {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    width: var(--mark-size);
-    height: var(--mark-size);
-    background-color: black;
-}
-.cell.o::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
     width: calc(var(--mark-size) * .70);
     height: calc(var(--mark-size) * .70);
     background-color: white;
+
 }
 
-/* 1 cirlce black (::before), 1 cirlce white (::after)  */
-/*.cell.o::before {
-    width: var(--mark-size);
-    height: var(--mark-size);
-    background-color: black;
+.winning-message {
+    position: fixed;
+    display: flex;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
 }
-*/
-/* .cell.o::after {
-    width: calc(var(--mark-size) * .70);
-    height: calc(var(--mark-size) * .70);
-    background-color: white;
-}
-*/
