@@ -49,7 +49,7 @@ turn then return that data, otherwise it's O turn. */
    
 /* ---------------WINNING LOGIC FUNCTIONS--------------- */ 
 
-if(chickenDinner() {
+    if (chickenDinner(currentClass)) {
         console.log ('winner')
     }
 
@@ -85,11 +85,18 @@ function hoverClass() {
 HTML board on hover and only show O if oTurn is true... 
 otherwise X for xTurn */
 
-/*this will check to see if any (some) win combo met */
+/*method will check to see if at least 1 array combo of 3
+is equal to any of the cells... then the < .every> method
+will return a Boolean value of T/F if all elements are the
+same class (X or O) */
 function chickenDinner (currentClass) {
-    WINNING_COMBINATIONS.some()
+    return WINNING_COMBINATIONS.some(combination => {
+        return combination.every(index => {
+            return cellEl[index].classList.contains(currentClass)
+        })
+    
+    })
 }
-
 
 
 /*----- constants -----*/
