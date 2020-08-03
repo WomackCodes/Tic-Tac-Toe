@@ -14,14 +14,27 @@ that the user can click on the cell and it will only fire
 one time! */ 
 
 cellEl.forEach(cell => {
-    cell.addEventListener('click', handleClick, {once: true})
+    cell.addEventListener('click', handleClick, {once: true});
 })
 
 function handleClick (evt) { 
-    const cell = e.target
-    const currentClass = xTurn ? X_CLASS : O_CLASS
+    const cell = e.target;
+    const currentClass = xTurn ? X_CLASS : O_CLASS;
+/* ABOVE: at this point we have a class turn, assigned it
+to currentClass and have targeted the cell of eListen 
+click. Now we will want to pass this data to determine 
+how to mark the cell with X or O (based on currentClass
+which we'll get from ternary operator saying if it's X
+turn then return that data, otherwise it's O turn. */
+    newClick (cell, currentClass);
 }
 
+/* BELOW: Link to the classList.add () that accesses DOM
+to request a list of the classes of an element.
+https://developer.mozilla.org/en-US/docs/Web/API/Element/classList   */
+function newClick(cell, currentClass) {
+    cell.classList.add(currentClass)
+}
 
 
 
