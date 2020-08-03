@@ -6,6 +6,7 @@ const X_CLASS = 'x';
 const O_CLASS = 'o';
 const cellEl = document.querySelectorAll('[xOcell]');
 const board = document.getElementById('board');
+const restartButton = document.getElementById('restartButton');
 const WINNING_COMBINATIONS = [
 /* Listed out in array 0 base */ 
 /* wins = left to right, top to bottom, diagonals */    
@@ -28,12 +29,18 @@ startGame(); /* initiator */
 /* START GAME FUNCTION - touch that keyboard lightly */
 function startGame () {
     cellEl.forEach(cell => {
+        cell.classList.remove(X_CLASS);
+        cell.classList.remove(O_CLASS);
+        cell.removeEventListener('click', handleClick);
         cell.addEventListener('click', handleClick, { once: true });
     })
     hoverClass ()
+    winningMessageElement.classList.remove('show');
+    /* removes dark screen on win to play again */
 }
 /* End START GAME FUNCTION - ok now go Godzilla mode */
 
+restartButton.addEventListener('click', startGame);
 /* CTO - The event listener will only work ONE TIME with 
 the {once: true} argument. This allows you to make it so
 that the user can click on the cell and it will only fire 
