@@ -5,7 +5,9 @@ cellEl is how we'll grab all 9 cells in HTML */
 const X_CLASS = 'x';
 const O_CLASS = 'o';
 const cellEl = document.querySelectorAll('[xOcell]');
-
+const WINNING_COMBINATIONS = [
+    []
+]
 let xTurn = "";
 let oTurn = ""; 
 
