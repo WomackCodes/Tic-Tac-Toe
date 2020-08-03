@@ -6,8 +6,8 @@ const X_CLASS = 'x';
 const O_CLASS = 'o';
 const cellEl = document.querySelectorAll('[xOcell]');
 
-let xTurn
-let oTurn
+let xTurn = "";
+let oTurn = ""; 
 
 /* CTO - The event listener will only work ONE TIME with 
 the {once: true} argument. This allows you to make it so
@@ -28,9 +28,9 @@ click. Now we will want to pass this data to determine
 how to mark the cell with X or O (based on currentClass
 which we'll get from ternary operator saying if it's X
 turn then return that data, otherwise it's O turn. */
-    swapTurns ()
+    swapTurns ();
+    hoverClass ();
 }
-
 function newClick(cell, currentClass) {
     cell.classList.add(currentClass)
 }
@@ -41,14 +41,24 @@ displays to user that data on the HTML Browser dynamically
 https://developer.mozilla.org/en-US/docs/Web/API/Element/classList   */
 
 function swapTurns () {
-    xTurn = !xTurn
+    xTurn = !xTurn;
 }
 /* this easy function just inverts the ternary operator
 output from line 23. This step swaps turns and will
-tell DOM to
+tell DOM to... TO DO */
 
-
-
+function hoverClass() {
+    board.classList.remove(X_CLASS);
+    board.classList.remove(O_CLASS);
+    if (oTurn) {
+        board.classList.add(O_CLASS);
+    } else {
+        board.classList.add(X_CLASS);
+    }
+}
+/* first this will ensure all classes are cleared from the 
+HTML board on hover and only show O if oTurn is true... 
+otherwise X for xTurn */
 
 
 
