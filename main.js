@@ -1,3 +1,4 @@
+/* TO DO  - VERIFY CODE LINE #'s in NOTES */
 
 /* const for x/o class for ease of use to target 
 cellEl is how we'll grab all 9 cells in HTML */
@@ -18,23 +19,34 @@ cellEl.forEach(cell => {
 })
 
 function handleClick (evt) { 
-    const cell = e.target;
+    const cell = evt.target;
     const currentClass = xTurn ? X_CLASS : O_CLASS;
-/* ABOVE: at this point we have a class turn, assigned it
-to currentClass and have targeted the cell of eListen 
-click. Now we will want to pass this data to determine 
+    newClick (cell, currentClass);
+/*  Now we've got a class turn, assigned it
+to currentClass, and have targeted the cell of eListen
+click. Now we will want to pass this data to determine
 how to mark the cell with X or O (based on currentClass
 which we'll get from ternary operator saying if it's X
 turn then return that data, otherwise it's O turn. */
-    newClick (cell, currentClass);
+    swapTurns ()
 }
 
-/* BELOW: Link to the classList.add () that accesses DOM
-to request a list of the classes of an element.
-https://developer.mozilla.org/en-US/docs/Web/API/Element/classList   */
 function newClick(cell, currentClass) {
     cell.classList.add(currentClass)
 }
+/*Link to the classList.add () that accesses DOM
+to pass the informatino of the click (cell and class of
+turn) to lines 12-20 depending on which cell. This then 
+displays to user that data on the HTML Browser dynamically
+https://developer.mozilla.org/en-US/docs/Web/API/Element/classList   */
+
+function swapTurns () {
+    xTurn = !xTurn
+}
+/* this easy function just inverts the ternary operator
+output from line 23. This step swaps turns and will
+tell DOM to
+
 
 
 
